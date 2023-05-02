@@ -34,7 +34,7 @@ DATA = {
 def home_view(request):
     menu = ""
     for dish in DATA:
-        url = reverse(dish, kwargs={"dish" : dish})
+        url = reverse("recipe", kwargs={"dish" : dish})
         menu += f'<div><a href={url}>{dish.capitalize()}</a></div>'
     return HttpResponse (menu)    
 

@@ -1,4 +1,7 @@
+import copy
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse
 
 DATA = {
     'omlet': {
@@ -28,3 +31,20 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+def home_view(request):
+    menu = ""
+    for dish in DATA:
+        url = reverse(dish, kwargs={"dish" : dish})
+        menu += f'<div><a href={url}>{dish.capitalize()}</a></div>'
+    return HttpResponse (menu)    
+
+def recipe_view(request, dish):
+    servings = int(request.GET.get('servings', 1))
+    data = copy.deepcopy(DATA)
+    recipe = {dish : data[dish]}
+    if dish in data:
+        for ingredient, q in recipe[dish].items():
+            recipe[dish][ingredient] = servings * q
+        context = {"recipe" : recipe[dish]} 
+    return render(request, 'calculator/index.html', context)
+    

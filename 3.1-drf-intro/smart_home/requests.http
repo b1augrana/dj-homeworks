@@ -43,3 +43,22 @@ Content-Type: application/json
 # получение информации по датчику
 GET {{baseUrl}}/sensors/1/
 Content-Type: application/json
+
+###
+
+# вывести список измерений
+GET {{baseUrl}}/measurements/?sensor=<pk>
+Content-Type: application/json
+
+###
+
+# добавление измерения с изображением
+POST {{baseUrl}}/measurements/
+Content-Type: application/json
+
+{
+  "sensor": 1,
+  "temperature": 25.8,
+  "image_url": "https://www.citilink.ru/product/datchik-temperatury-i-vlazhnosti-xiaomi-mi-temperature-and-humidity-mo-1475812/?yclid=3005249713101412958&utm_source=yandex&utm_medium=cpc&utm_campaign=cities-srch-cat-dsa_fid_test_tov-umnyi_dom&utm_term=&utm_content=%7Cc%3A75805738%7Cg%3A4955198041%7Cb%3A12351982988%7Ck%3A2617515%7Cst%3Asearch%7Ca%3Ano%7Cs%3Anone%7Ct%3Apremium%7Cp%3A3%7Cr%3A2617515%7Cdev%3Adesktop|cgci:0&utm_param1=umnyi_dom"
+}
+

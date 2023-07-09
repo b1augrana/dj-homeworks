@@ -84,7 +84,7 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '5432',
         'USER': 'postgres',
-        'PASSWORD': 'pIvo2412onlyp',
+        'PASSWORD': 'postgres',
     }
 }
 
@@ -120,6 +120,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+MAX_STUDENTS_PER_COURSE = 20
 
 
 # Static files (CSS, JavaScript, Images)

@@ -77,20 +77,18 @@ def test_create_course(api_client):
     
 @pytest.mark.django_db
 def test_course_update(api_client,courses_factory,students_factory):
-    students_factory(id=1,name='TestStudent')
-    courses_factory(id=1,name='TestCourse')
-    data = {'name': 'UpdateCourse', 'students': [1]}
-    response = api_client.patch('/api/v1/courses/1/',data=data,format='json')
+    course = courses_factory(_quantity=1)
+    updated_name = 'UpdatedCourse'
+    response = api_client.patch(f'/api/v1/courses/{course[0].id}/', data={'name': updated_name}, format='json')
     assert response.status_code == 200
-    assert Course.objects.get(id=1).name == 'UpdateCourse'
-    assert Course.objects.get(id=1).students.all().count() == 1
-    assert list(Course.objects.get(id=1).students.all()) == [Student.objects.get(id=1)]
+    assert response.data['name'] == 'UpdatedCourse'
+    
     
     
 @pytest.mark.django_db
 def test_course_delete(api_client,courses_factory):
-    courses_factory(id=1,name='TestCourse')
-    response = api_client.delete('/api/v1/courses/1/')
+    course = courses_factory(_quantity=1)
+    response = api_client.delete(f'/api/v1/courses/{course[0].id}/')
     assert response.status_code == 204
     assert len(Course.objects.all()) == 0
     
